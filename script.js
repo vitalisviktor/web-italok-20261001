@@ -24,3 +24,12 @@ drinksList.forEach(e => {
     Add(e.name,e.price);
 });
 
+const form = document.getElementById("form");
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+    const formData = new FormData(form);
+    const name = formData.get("name");
+    const price = formData.get("price");
+    Add(name,price);
+});
