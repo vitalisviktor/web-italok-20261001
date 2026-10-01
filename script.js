@@ -6,6 +6,10 @@ let drinksList = [
   {name: "Jeges tea", price: 600},
 ];
 
+const form = document.getElementById("form");
+form.reset();
+const nameError = document.getElementById("name-error");
+const priceError = document.getElementById("price-error");
 const table = document.getElementById("table-body");
 
 function Add(name,price){
@@ -24,9 +28,6 @@ drinksList.forEach(e => {
     Add(e.name,e.price);
 });
 
-const form = document.getElementById("form");
-const nameError = document.getElementById("name-error");
-const priceError = document.getElementById("price-error");
 form.addEventListener("submit", function(e){
     e.preventDefault();
     let error = false;
@@ -54,5 +55,6 @@ form.addEventListener("submit", function(e){
     }
     if(!error){
         Add(name,price);
+        form.reset();
     }
 });
