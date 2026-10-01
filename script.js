@@ -27,28 +27,32 @@ drinksList.forEach(e => {
 const form = document.getElementById("form");
 const nameError = document.getElementById("name-error");
 const priceError = document.getElementById("price-error");
-
 form.addEventListener("submit", function(e){
     e.preventDefault();
+    let error = false;
     const formData = new FormData(form);
     const name = formData.get("name");
     const price = formData.get("price");
+    
     if(name.trim() == ""){
-        nameError.innerText = "A név nem lehet üres!"
+        nameError.innerText = "A név nem lehet üres!";
+        error = true;
     }
     else{
-
-        if(price < 0){
-            priceError.innerText = "Az ár nem lehet negatív!"
-        }
-        else if(price % 10 != 0){
-            priceError.innerText = "Az árnak oszthatónak kell lennie 10-zel!"
-        }
-        else{
-            Add(name,price);
-            priceError.innerText = ""
-            nameError.innerText = ""
-            
-        }
+        nameError.innerText = "" ;
+    }
+    if(price < 0){
+        priceError.innerText = "Az ár nem lehet negatív!";
+        error = true;
+    }
+    else if(price % 10 != 0){
+        priceError.innerText = "Az árnak oszthatónak kell lennie 10-zel!";
+        error = true;
+    }
+    else{
+        priceError.innerText = "";
+    }
+    if(!error){
+        Add(name,price);
     }
 });
