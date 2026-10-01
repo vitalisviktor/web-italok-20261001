@@ -25,11 +25,30 @@ drinksList.forEach(e => {
 });
 
 const form = document.getElementById("form");
+const nameError = document.getElementById("name-error");
+const priceError = document.getElementById("price-error");
 
 form.addEventListener("submit", function(e){
     e.preventDefault();
     const formData = new FormData(form);
     const name = formData.get("name");
     const price = formData.get("price");
-    Add(name,price);
+    if(name.trim() == ""){
+        nameError.innerText = "A név nem lehet üres!"
+    }
+    else{
+
+        if(price < 0){
+            priceError.innerText = "Az ár nem lehet negatív!"
+        }
+        else if(price % 10 != 0){
+            priceError.innerText = "Az árnak oszthatónak kell lennie 10-zel!"
+        }
+        else{
+            Add(name,price);
+            priceError.innerText = ""
+            nameError.innerText = ""
+            
+        }
+    }
 });
